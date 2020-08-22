@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-concessionaria/api-concessionaria.iml" filepath="$PROJECT_DIR$/api-concessionaria/api-concessionaria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bubble-sort/bubble-sort.iml" filepath="$PROJECT_DIR$/bubble-sort/bubble-sort.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/exercicios-.iml" filepath="$PROJECT_DIR$/.idea/exercicios-.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fatorial/fatorial.iml" filepath="$PROJECT_DIR$/fatorial/fatorial.iml" />
+      <module fileurl="file://$PROJECT_DIR$/percentual/percentual.iml" filepath="$PROJECT_DIR$/percentual/percentual.iml" />
+      <module fileurl="file://$PROJECT_DIR$/soma-multiplos/soma-multiplos.iml" filepath="$PROJECT_DIR$/soma-multiplos/soma-multiplos.iml" />
+    </modules>
+  </component>
+</project>

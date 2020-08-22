@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="fatorial" />
+        <module name="bubble-sort" />
+        <module name="api-concessionaria" />
+        <module name="percentual" />
+        <module name="soma-multiplos" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-concessionaria" target="11" />
+      <module name="bubble-sort" target="11" />
+      <module name="fatorial" target="11" />
+      <module name="percentual" target="11" />
+      <module name="soma-multiplos" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-concessionaria" options="-parameters" />
+      <module name="bubble-sort" options="-parameters" />
+      <module name="fatorial" options="-parameters" />
+      <module name="percentual" options="-parameters" />
+      <module name="soma-multiplos" options="-parameters" />
+    </option>
+  </component>
+</project>
