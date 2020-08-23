@@ -1,5 +1,6 @@
 package com.apiconcessionaria.controller;
 
+import com.apiconcessionaria.dto.QuantidadeVeiculosDecadaDto;
 import com.apiconcessionaria.dto.VeiculoDto;
 import com.apiconcessionaria.dto.VeiculoVendidoDto;
 import com.apiconcessionaria.entity.Veiculo;
@@ -14,9 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-
 
 @RestController
 @RequestMapping("/veiculos")
@@ -29,7 +29,7 @@ public class VeiculoController {
     @Autowired
     private MessageSource messageSource;
 
-    @GetMapping("/buscar/{id}")
+    @GetMapping("/{id}")
     @ApiOperation("Busca um veículo pelo id.")
     public ResponseEntity<Veiculo> buscar(@PathVariable("id") Integer id){
         return ResponseEntity.ok(service.buscar(id));
@@ -51,6 +51,7 @@ public class VeiculoController {
     }
 
     @PatchMapping("/{id}")
+    @ApiOperation("Edita o campo vendido do veiculo enviando formulário pelo corpo da requisição e o id pela url.")
     public ResponseEntity<Veiculo> editarVendido(@PathVariable("id") Integer id, @RequestBody VeiculoVendidoDto form){
         Veiculo veiculo = service.editarParcial(form, id);
         return new ResponseEntity<>(veiculo, HttpStatus.CREATED);
@@ -64,22 +65,25 @@ public class VeiculoController {
     }
 
     @GetMapping
+    @ApiOperation("Lista veiculos paginado passando a informação e o tamanho da pagina pelo corpo da requisição")
     public ResponseEntity<Page<Veiculo>> listarPaginado(final PageFilter filter){
         return ResponseEntity.ok(this.service.listar(filter));
     }
 
     @GetMapping("/quantidade-por-decada")
-    public ResponseEntity<Map<String, Long>> veiculosPorDecada(){
+    @ApiOperation("Lista a quantidade de veiculo cadastrado por decada")
+    public ResponseEntity<List<QuantidadeVeiculosDecadaDto>> veiculosPorDecada(){
         return ResponseEntity.ok(service.distribuicaoVeiculoDecada());
     }
 
     @GetMapping("/registrados-ultima-semana")
+    @ApiOperation("Lista os veiculos que foram cadastrados na ultima semana com paginação passando a informação e o tamanho da pagina pelo corpo da requisição")
     public ResponseEntity<Page<Veiculo>> veiculosRegistradosUltimaSemana(final PageFilter filter){
         return ResponseEntity.ok(service.veiculosRegistradosUltimaSemana(filter));
     }
 
-
     @GetMapping("/quantidade-nao-vendidos")
+    @ApiOperation("Retorna a quantidade de veiculos cadastrados que não foram vendidos")
     public ResponseEntity<Integer> veiculosNaoVendidos(){
         return ResponseEntity.ok(service.quantidadeVeiculosNaoVendidos());
     }

@@ -1,5 +1,6 @@
 package com.apiconcessionaria.specification;
 
+import com.apiconcessionaria.entity.Veiculo;
 import com.apiconcessionaria.enums.Marcas;
 import com.apiconcessionaria.filter.VeiculoFilter;
 import org.springframework.data.jpa.domain.Specification;
@@ -9,7 +10,7 @@ import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VeiculoSpecification implements Specification {
+public class VeiculoSpecification implements Specification<Veiculo> {
 
     private static final String NOME = "nome";
     private static final String ANO = "ano";
@@ -24,10 +25,10 @@ public class VeiculoSpecification implements Specification {
 
     @Override
     public Predicate toPredicate(Root root, CriteriaQuery criteriaQuery, CriteriaBuilder criteriaBuilder) {
-        final Path nome = root.get(NOME);
-        final Path ano = root.get(ANO);
-        final Path marca = root.get(MARCA);
-        final Path vendido = root.get(VENDIDO);
+        final Path<String> nome = root.get(NOME);
+        final Path<Integer> ano = root.get(ANO);
+        final Path<Marcas> marca = root.get(MARCA);
+        final Path<Boolean> vendido = root.get(VENDIDO);
 
         final List<Predicate> predicates = new ArrayList<>();
 

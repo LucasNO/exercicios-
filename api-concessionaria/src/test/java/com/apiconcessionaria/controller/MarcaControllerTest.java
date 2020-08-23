@@ -1,7 +1,6 @@
 package com.apiconcessionaria.controller;
 
-import com.apiconcessionaria.entity.Veiculo;
-import com.apiconcessionaria.enums.Marcas;
+import com.apiconcessionaria.dto.QuantidadeVeiculosMarcaDto;
 import com.apiconcessionaria.service.MarcaService;
 import com.apiconcessionaria.service.VeiculoService;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Map;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -51,8 +50,8 @@ class MarcaControllerTest {
     @Test
     void veiculosPorFabricante() throws Exception {
 
-        Map<Marcas, Long> map = null;
-        when(this.marcaService.distribuicaoVeiculoFabricante()).thenReturn(map);
+        List<QuantidadeVeiculosMarcaDto> veiculos = null;
+        when(this.marcaService.distribuicaoVeiculoFabricante()).thenReturn(veiculos);
 
         mockMvc.perform(get("/marcas/veiculos-por-fabricante"))
                 .andExpect(status().isOk());

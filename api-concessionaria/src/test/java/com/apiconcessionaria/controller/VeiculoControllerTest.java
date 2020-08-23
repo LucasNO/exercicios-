@@ -1,5 +1,6 @@
 package com.apiconcessionaria.controller;
 
+import com.apiconcessionaria.dto.QuantidadeVeiculosDecadaDto;
 import com.apiconcessionaria.dto.VeiculoDto;
 import com.apiconcessionaria.entity.Veiculo;
 import com.apiconcessionaria.enums.Marcas;
@@ -18,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Map;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -157,9 +158,9 @@ class VeiculoControllerTest {
     @Test
     void veiculosPorDecada() throws Exception {
 
-        Map<String, Long> map = null;
+        List<QuantidadeVeiculosDecadaDto> list = null;
 
-        when(this.service.distribuicaoVeiculoDecada()).thenReturn(map);
+        when(this.service.distribuicaoVeiculoDecada()).thenReturn(list);
 
         mockMvc.perform(get("/veiculos/quantidade-por-decada"))
                 .andExpect(status().isOk());

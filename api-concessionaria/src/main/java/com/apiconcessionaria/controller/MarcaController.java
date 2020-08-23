@@ -1,6 +1,6 @@
 package com.apiconcessionaria.controller;
 
-
+import com.apiconcessionaria.dto.QuantidadeVeiculosMarcaDto;
 import com.apiconcessionaria.enums.Marcas;
 import com.apiconcessionaria.service.MarcaService;
 import io.swagger.annotations.Api;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/marcas")
@@ -23,14 +22,15 @@ public class MarcaController {
     @Autowired
     private MarcaService service;
 
-    @GetMapping("/listar")
+    @GetMapping
     @ApiOperation("Retorna a lista de Marcas cadastradas no sistema.")
     public ResponseEntity<List<Marcas>> listarMarcas(){
         return ResponseEntity.ok(Arrays.asList(Marcas.values()));
     }
 
     @GetMapping("/veiculos-por-fabricante")
-    public ResponseEntity<Map<Marcas, Long>> veiculosPorFabricante(){
+    @ApiOperation("Lista a quantidade de veiculo cadastrado por marca")
+    public ResponseEntity<List<QuantidadeVeiculosMarcaDto>> veiculosPorFabricante(){
         return ResponseEntity.ok(service.distribuicaoVeiculoFabricante());
     }
 }

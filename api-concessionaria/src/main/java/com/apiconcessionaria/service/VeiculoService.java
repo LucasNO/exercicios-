@@ -1,5 +1,6 @@
 package com.apiconcessionaria.service;
 
+import com.apiconcessionaria.dto.QuantidadeVeiculosDecadaDto;
 import com.apiconcessionaria.dto.VeiculoDto;
 import com.apiconcessionaria.dto.VeiculoVendidoDto;
 import com.apiconcessionaria.entity.Veiculo;
@@ -15,10 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,7 +41,7 @@ public class VeiculoService {
         try {
             return repository.save(dtoToVeiculo(dto));
         }catch (Exception e){
-            throw new BusinessException(messageSource.getMessage("veiculo.error.salvar", null, Locale.ROOT));
+            throw new BusinessException(messageSource.getMessage("veiculo.erro.salvar", null, Locale.ROOT));
         }
     }
 
@@ -65,7 +63,7 @@ public class VeiculoService {
                 repository.delete(veiculo);
             }catch (Exception e){
                 Object parametros[] = {id.toString()};
-                throw new BusinessException(messageSource.getMessage("veiculo.error.deletar", parametros, Locale.ROOT));
+                throw new BusinessException(messageSource.getMessage("veiculo.erro.deletar", parametros, Locale.ROOT));
             }
     }
 
@@ -90,16 +88,23 @@ public class VeiculoService {
                 .build();
     }
 
-    public Map<String, Long> distribuicaoVeiculoDecada(){
+    public List<QuantidadeVeiculosDecadaDto> distribuicaoVeiculoDecada(){
         List<Veiculo> veiculos = repository.findAll();
-        return veiculos.stream().collect(Collectors.groupingBy(v -> v.getAno().toString().substring(0, v.getAno().toString().length()-1)+"0", Collectors.counting()));
+        List<QuantidadeVeiculosDecadaDto> list = new ArrayList<>();
+        Map<String, Long> map = veiculos.stream().collect(Collectors.groupingBy(v -> v.getAno().toString().substring(0, v.getAno().toString().length()-1)+"0", Collectors.counting()));
+
+        map.forEach((s, aLong) -> {
+            QuantidadeVeiculosDecadaDto dto = new QuantidadeVeiculosDecadaDto(s ,aLong.intValue());
+            list.add(dto);
+        });
+
+        return list;
     }
 
     public Page<Veiculo> veiculosRegistradosUltimaSemana(PageFilter filter) {
         LocalDateTime data = LocalDate.now().atStartOfDay();
         final Pageable pageable = PageRequest.of(filter.getPageNumber(), filter.getPageSize());
-        final Page<Veiculo> veiculos = this.repository.findByCreatedAfter(data.minusWeeks(1),pageable);
-        return veiculos;
+        return this.repository.findByCreatedAfter(data.minusWeeks(1),pageable);
     }
 
     public Integer quantidadeVeiculosNaoVendidos(){

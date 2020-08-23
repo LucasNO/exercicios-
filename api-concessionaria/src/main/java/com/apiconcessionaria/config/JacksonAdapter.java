@@ -17,14 +17,10 @@ import java.io.IOException;
 @Configuration
 public class JacksonAdapter implements WebMvcConfigurer {
 
-    protected static final String SIZE = "size";
     protected static final String NUMBER = "number";
-    protected static final String TOTAL_ELEMENTS = "totalElements";
     protected static final String LAST = "last";
     protected static final String TOTAL_PAGES = "totalPages";
-    protected static final String SORT = "sort";
     protected static final String FIRST = "first";
-    protected static final String NUMBER_OF_ELEMENTS = "numberOfElements";
     protected static final String CONTENT = "content";
 
     @Bean
